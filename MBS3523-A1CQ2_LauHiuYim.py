@@ -19,9 +19,9 @@ def send_angles(pan, tilt):
     ser.write(f"{pan},{tilt}\n".encode())
 
 cv2.namedWindow("Trackbar")
-cv2.createTrackbar('HUELOW', 'Trackbar', 0, 179, nothing)
-cv2.createTrackbar('HUEHIGH', 'Trackbar', 150, 255, nothing)
-cv2.createTrackbar('SATLOW', 'Trackbar', 0, 255, nothing)
+cv2.createTrackbar('HUELOW', 'Trackbar', 103, 179, nothing)
+cv2.createTrackbar('HUEHIGH', 'Trackbar', 204, 255, nothing)
+cv2.createTrackbar('SATLOW', 'Trackbar', 102, 255, nothing)
 cv2.createTrackbar('SATHIGH', 'Trackbar', 255, 255, nothing)
 cv2.createTrackbar('VALLOW', 'Trackbar', 0, 255, nothing)
 cv2.createTrackbar('VALHIGH', 'Trackbar', 255, 255, nothing)
