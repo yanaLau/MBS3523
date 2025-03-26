@@ -6,7 +6,7 @@ import numpy as np
 cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 frame = np.zeros((480, 640, 3), np.uint8)
 
-ser = serial.Serial('COM9', baudrate = 9600, timeout = 1)
+ser = serial.Serial('COM11', baudrate = 9600, timeout = 1)
 time.sleep(2)
 
 pan_angle = 90
@@ -19,11 +19,11 @@ def send_angles(pan, tilt):
     ser.write(f"{pan},{tilt}\n".encode())
 
 cv2.namedWindow("Trackbar")
-cv2.createTrackbar('HUELOW', 'Trackbar', 103, 179, nothing)
-cv2.createTrackbar('HUEHIGH', 'Trackbar', 204, 255, nothing)
-cv2.createTrackbar('SATLOW', 'Trackbar', 102, 255, nothing)
+cv2.createTrackbar('HUELOW', 'Trackbar', 178, 255, nothing)
+cv2.createTrackbar('HUEHIGH', 'Trackbar', 234, 255, nothing)
+cv2.createTrackbar('SATLOW', 'Trackbar', 52, 255, nothing)
 cv2.createTrackbar('SATHIGH', 'Trackbar', 255, 255, nothing)
-cv2.createTrackbar('VALLOW', 'Trackbar', 0, 255, nothing)
+cv2.createTrackbar('VALLOW', 'Trackbar', 50, 255, nothing)
 cv2.createTrackbar('VALHIGH', 'Trackbar', 255, 255, nothing)
 
 smoothing_factor = 0.1
@@ -54,10 +54,9 @@ while True:
     if contours:
         largest_contour = contours[0]
         area = cv2.contourArea(largest_contour)
+        (x, y, w, h) = cv2.boundingRect(largest_contour)
 
         if area > 100:
-
-            (x, y, w, h) = cv2.boundingRect(largest_contour)
 
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 3)
 
@@ -93,3 +92,5 @@ while True:
 cam.release()
 cv2.destroyAllWindows()
 ser.close()
+
+
